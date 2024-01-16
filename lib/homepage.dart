@@ -117,7 +117,7 @@ class _HomepageState extends State<Homepage> {
           iconTheme: const IconThemeData(color: Colors.white),
           toolbarHeight: 60,
           backgroundColor: Colors.transparent,
-          title: AppBarTitle(),
+          title: const AppBarTitle(),
         ),
         backgroundColor: Colors.grey[900],
         body: Column(
