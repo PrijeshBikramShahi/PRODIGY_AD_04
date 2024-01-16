@@ -64,14 +64,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 20.0,bottom: 60),
               child: InkWell(
+                borderRadius: BorderRadius.circular(15),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Homepage()));
                 },
-                child: SizedBox(
-                  height: 100,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  padding: EdgeInsets.all(20),
                   child: Text(
                     "START GAME",
                     style: myNewFontWhite,

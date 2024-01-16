@@ -31,7 +31,9 @@ class _HomepageState extends State<Homepage> {
           TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 20));
 
   void onXOTap(int index) {
-    filledBox += 1;
+    if (xoList[index] == '') {
+      filledBox += 1;
+    }
     if (filledBox < 9) {
       setState(() {
         if (xoList[index] == '') {
@@ -169,27 +171,37 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
-  void onNewButton() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          iconTheme: IconThemeData(color: Colors.white),
           toolbarHeight: 60,
           backgroundColor: Colors.transparent,
           title: Padding(
-            padding: const EdgeInsets.only(top:18.0),
+            padding: const EdgeInsets.only(top: 18.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "XO",
+                  textAlign: TextAlign.center,
                   style: titleFontWhite,
                 ),
                 Text(
                   "XO",
+                  textAlign: TextAlign.center,
                   style: titleFont,
                 ),
+                SizedBox(
+                  width: 40,
+                )
               ],
             ),
           ),
@@ -232,7 +244,9 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             MyButton(
               icon: Icons.restart_alt_rounded,
               onTap: onResetButton,
