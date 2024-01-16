@@ -32,7 +32,7 @@ class MyButton extends StatelessWidget {
           child: Icon(
             icon,
             size: 40,
-            color: const Color.fromARGB(255, 160, 40, 40),
+            color: Colors.redAccent,
           ),
         ),
       ),
