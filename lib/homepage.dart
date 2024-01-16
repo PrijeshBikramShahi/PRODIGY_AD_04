@@ -11,77 +11,141 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   bool oTurn = true;
-  String playerName = 'Player 1';
-  List<String> emptyList = ['', '', '', '', '', '', '', '', ''];
+  int filledBox = 0;
+  String oName = 'Player 1';
+  String xName = 'Player 2';
   List<String> xoList = ['', '', '', '', '', '', '', '', ''];
 
   void onXOTap(int index) {
-    setState(() {
-      
-      if (xoList[index] == '') {
-        if (!oTurn) {
-          setState(() {
-            playerName = "Player 1";
-            xoList[index] = 'O';
-            
-          });
-        } else {
-          setState(() {
-            playerName = "Player 2";
-            xoList[index] = 'X';
-
-          });
+    filledBox += 1;
+    if (filledBox < 9) {
+      setState(() {
+        if (xoList[index] == '') {
+          if (!oTurn) {
+            setState(() {
+              xoList[index] = 'O';
+            });
+          } else {
+            setState(() {
+              xoList[index] = 'X';
+            });
+          }
+          checkForWinner(index);
         }
-        checkForWinner(index);
-        oTurn = !oTurn;
-      }
-    });
+      });
+      oTurn = !oTurn;
+    } else {
+      showDrawScreen();
+    }
   }
 
   void checkForWinner(index) {
     if (xoList[0] != '' && xoList[0] == xoList[1] && xoList[0] == xoList[2]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
     if (xoList[3] != '' && xoList[3] == xoList[4] && xoList[3] == xoList[5]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
     if (xoList[6] != '' && xoList[6] == xoList[7] && xoList[6] == xoList[8]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
     if (xoList[0] != '' && xoList[0] == xoList[3] && xoList[0] == xoList[6]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
     if (xoList[1] != '' && xoList[1] == xoList[4] && xoList[1] == xoList[7]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
     if (xoList[2] != '' && xoList[2] == xoList[5] && xoList[2] == xoList[8]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
     if (xoList[0] != '' && xoList[0] == xoList[4] && xoList[0] == xoList[8]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
     if (xoList[6] != '' && xoList[6] == xoList[4] && xoList[6] == xoList[2]) {
-      showWinnerScreen(playerName);
+      showWinnerScreen();
     }
   }
 
-  void showWinnerScreen(String name) {
+  void showDrawScreen() {
+    String winner = oTurn ? oName : xName;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Colors.transparent,
         content: Container(
-          height: 300,
-          child: Column(
-            children: [
-              Text("WINNER!!! $name"),
-              MyButton(
-                icon: Icons.restart_alt_rounded,
-                onTap: () {
-                  onResetButton();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+          decoration: BoxDecoration(
+              border: Border.all(width: 2, color: Colors.grey),
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.grey[900]),
+          height: 250,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Text(
+                  "Draw! Try again?",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35,
+                      color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                MyButton(
+                  icon: Icons.restart_alt_rounded,
+                  onTap: () {
+                    onResetButton();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showWinnerScreen() {
+    String winner = oTurn ? oName : xName;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.transparent,
+        content: Container(
+          decoration: BoxDecoration(
+              border: Border.all(width: 2, color: Colors.grey),
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.grey[900]),
+          height: 250,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  "WINNER!!! $winner",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35,
+                      color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                MyButton(
+                  icon: Icons.restart_alt_rounded,
+                  onTap: () {
+                    onResetButton();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -90,9 +154,11 @@ class _HomepageState extends State<Homepage> {
 
   void onResetButton() {
     setState(() {
-      xoList = emptyList;
-      oTurn = true;
-      playerName = 'Player 1';
+      for (var i = 0; i < 9; i++) {
+        xoList[i] = '';
+      }
+      oTurn = !oTurn;
+      filledBox = 0;
     });
   }
 
@@ -125,7 +191,7 @@ class _HomepageState extends State<Homepage> {
             ],
           ),
         ),
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.grey[900],
         body: Column(
           children: [
             Container(
@@ -134,7 +200,7 @@ class _HomepageState extends State<Homepage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "$playerName",
+                    oTurn ? "$oName" : "$xName",
                     style: const TextStyle(
                       color: Colors.redAccent,
                       fontSize: 30,
