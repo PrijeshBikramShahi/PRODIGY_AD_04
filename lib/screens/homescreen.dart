@@ -17,12 +17,18 @@ class _HomeScreenState extends State<HomeScreen> {
   static var titleFontWhite = GoogleFonts.pressStart2p(
       textStyle:
           const TextStyle(color: Colors.white, letterSpacing: 2, fontSize: 40));
-  static var myNewFont = GoogleFonts.pressStart2p(
-      textStyle: const TextStyle(
-          color: Colors.redAccent, letterSpacing: 2, fontSize: 20));
   static var myNewFontWhite = GoogleFonts.pressStart2p(
       textStyle:
           const TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 20));
+
+  @override
+  void initState() {
+    // ignore: todo
+    // TODO: implement initState
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,18 +70,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0,bottom: 60),
+              padding: const EdgeInsets.only(top: 20.0, bottom: 60),
               child: InkWell(
                 borderRadius: BorderRadius.circular(15),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Homepage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Homepage()));
                 },
                 child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15)
-                  ),
-                  padding: EdgeInsets.all(20),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                  padding: const EdgeInsets.all(20),
                   child: Text(
                     "START GAME",
                     style: myNewFontWhite,

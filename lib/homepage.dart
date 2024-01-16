@@ -19,16 +19,16 @@ class _HomepageState extends State<Homepage> {
 
   static var titleFont = GoogleFonts.pressStart2p(
       textStyle:
-          TextStyle(color: Colors.redAccent, letterSpacing: 2, fontSize: 40));
+          const TextStyle(color: Colors.redAccent, letterSpacing: 2, fontSize: 40));
   static var titleFontWhite = GoogleFonts.pressStart2p(
       textStyle:
-          TextStyle(color: Colors.white, letterSpacing: 2, fontSize: 40));
+          const TextStyle(color: Colors.white, letterSpacing: 2, fontSize: 40));
   static var myNewFont = GoogleFonts.pressStart2p(
       textStyle:
-          TextStyle(color: Colors.redAccent, letterSpacing: 2, fontSize: 20));
+          const TextStyle(color: Colors.redAccent, letterSpacing: 2, fontSize: 20));
   static var myNewFontWhite = GoogleFonts.pressStart2p(
       textStyle:
-          TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 20));
+          const TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 20));
 
   void onXOTap(int index) {
     if (xoList[index] == '') {
@@ -176,12 +176,12 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           toolbarHeight: 60,
           backgroundColor: Colors.transparent,
           title: Padding(
@@ -199,7 +199,7 @@ class _HomepageState extends State<Homepage> {
                   textAlign: TextAlign.center,
                   style: titleFont,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 40,
                 )
               ],
@@ -214,7 +214,7 @@ class _HomepageState extends State<Homepage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(oTurn ? "$oName" : "$xName", style: myNewFont),
+                  Text(oTurn ? oName : xName, style: myNewFont),
                   Text(
                     "'s turn",
                     style: myNewFontWhite,
@@ -244,7 +244,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             MyButton(
