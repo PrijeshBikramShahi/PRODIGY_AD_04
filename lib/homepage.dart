@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:xoxo/screens/dialog_box.dart';
+import 'package:xoxo/utils/appbar_title.dart';
 import 'package:xoxo/utils/box.dart';
+import 'package:xoxo/utils/fonts.dart';
 import 'package:xoxo/utils/my_button.dart';
 
 class Homepage extends StatefulWidget {
@@ -16,19 +18,6 @@ class _HomepageState extends State<Homepage> {
   String oName = 'Player 1';
   String xName = 'Player 2';
   List<String> xoList = ['', '', '', '', '', '', '', '', ''];
-
-  static var titleFont = GoogleFonts.pressStart2p(
-      textStyle:
-          const TextStyle(color: Colors.redAccent, letterSpacing: 2, fontSize: 40));
-  static var titleFontWhite = GoogleFonts.pressStart2p(
-      textStyle:
-          const TextStyle(color: Colors.white, letterSpacing: 2, fontSize: 40));
-  static var myNewFont = GoogleFonts.pressStart2p(
-      textStyle:
-          const TextStyle(color: Colors.redAccent, letterSpacing: 2, fontSize: 20));
-  static var myNewFontWhite = GoogleFonts.pressStart2p(
-      textStyle:
-          const TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 20));
 
   void onXOTap(int index) {
     if (xoList[index] == '') {
@@ -86,38 +75,11 @@ class _HomepageState extends State<Homepage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.transparent,
-        content: Container(
-          decoration: BoxDecoration(
-              border: Border.all(width: 2, color: Colors.grey),
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.grey[900]),
-          height: 250,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  "Draw! Try again?",
-                  textAlign: TextAlign.center,
-                  style: myNewFontWhite,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                MyButton(
-                  icon: Icons.restart_alt_rounded,
-                  onTap: () {
-                    onResetButton();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+          backgroundColor: Colors.transparent,
+          content: DialogBox(
+            resetButton: onResetButton,
+            displayText: "Draw! Try again?",
+          )),
     );
   }
 
@@ -126,38 +88,9 @@ class _HomepageState extends State<Homepage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.transparent,
-        content: Container(
-          decoration: BoxDecoration(
-              border: Border.all(width: 2, color: Colors.grey),
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.grey[900]),
-          height: 250,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  "WINNER!!! $winner",
-                  textAlign: TextAlign.center,
-                  style: myNewFontWhite,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                MyButton(
-                  icon: Icons.restart_alt_rounded,
-                  onTap: () {
-                    onResetButton();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+          backgroundColor: Colors.transparent,
+          content: DialogBox(
+              resetButton: onResetButton, displayText: "WINNER!!! $winner")),
     );
   }
 
@@ -184,27 +117,7 @@ class _HomepageState extends State<Homepage> {
           iconTheme: const IconThemeData(color: Colors.white),
           toolbarHeight: 60,
           backgroundColor: Colors.transparent,
-          title: Padding(
-            padding: const EdgeInsets.only(top: 18.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "XO",
-                  textAlign: TextAlign.center,
-                  style: titleFontWhite,
-                ),
-                Text(
-                  "XO",
-                  textAlign: TextAlign.center,
-                  style: titleFont,
-                ),
-                const SizedBox(
-                  width: 40,
-                )
-              ],
-            ),
-          ),
+          title: AppBarTitle(),
         ),
         backgroundColor: Colors.grey[900],
         body: Column(
@@ -214,10 +127,10 @@ class _HomepageState extends State<Homepage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(oTurn ? oName : xName, style: myNewFont),
+                  Text(oTurn ? oName : xName, style: Fonts.myNewFont),
                   Text(
                     "'s turn",
-                    style: myNewFontWhite,
+                    style: Fonts.myNewFontWhite,
                   ),
                 ],
               ),

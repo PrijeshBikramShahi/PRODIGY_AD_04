@@ -1,7 +1,7 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:xoxo/homepage.dart';
+import 'package:xoxo/utils/fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,16 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static var titleFont = GoogleFonts.pressStart2p(
-      textStyle: const TextStyle(
-          color: Colors.redAccent, letterSpacing: 2, fontSize: 40));
-  static var titleFontWhite = GoogleFonts.pressStart2p(
-      textStyle:
-          const TextStyle(color: Colors.white, letterSpacing: 2, fontSize: 40));
-  static var myNewFontWhite = GoogleFonts.pressStart2p(
-      textStyle:
-          const TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 20));
-
   @override
   void initState() {
     // ignore: todo
@@ -42,11 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   "XO",
-                  style: titleFontWhite,
+                  style: Fonts.titleFontWhite,
                 ),
                 Text(
                   "XO",
-                  style: titleFont,
+                  style: Fonts.titleFont,
                 ),
               ],
             ),
@@ -85,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(20),
                   child: Text(
                     "START GAME",
-                    style: myNewFontWhite,
+                    style: Fonts.myNewFontWhite,
                   ),
                 ),
               ),
